@@ -1,0 +1,21 @@
+$almost-white: #F1F1F5;
+$light-grey: #D0D4DB;
+$medium-blue: #03628C;
+$dark-blue: #013E5B;
+$very-dark-blue: #012b41;
+
+
+//Fonts
+$big-title: 'Slabo 27px', serif;
+$small-title: 'Noto Serif', serif;
+$text: 'Open Sans Condensed', sans-serif;
+$button: 'Nunito', sans-serif;
+
+.normal-button{
+  font-family: $button;
+  font-weight: bold;
+  color: white;
+  border: none;
+  background-color: $very-dark-blue;
+  border-radius: 5px;
+}

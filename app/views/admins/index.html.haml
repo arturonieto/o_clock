@@ -1,0 +1,30 @@
+.admins_index
+ .container
+  %h2 Calómetro&reg;
+  -#= debug @end_date
+  -#= debug @start_date
+  -#= debug @other_time
+  .control_sheet
+   .employees_buttons_or_records
+    = render partial: "buttons_or_records"
+   -#- @employees.each do |e|
+    -#=debug e.recorded
+    -# e.records.each do |r|
+     -#=debug r.check_in
+     -#=debug r.check_out
+    -#.row
+     -#.col-md-6.col-xs-6.employee_name
+      -#.name
+       -#=' '+e.first_name+' '+e.last_name
+     -#.employees_buttons_or_records
+     -#.col-md-2.col-xs-2
+      -# if e.recorded_check_in
+       -#.check_in_time= e.recorded_check_in.check_in.strftime("%H:%M %P")
+      -# else
+       -#a.registrar_entrada 'Registrar Entrada', #
+       -#=link_to 'Registrar Entrada', check_in_path(:id => e.id), method: :post, :class => "registrar_entrada"
+     -#.col-md-2.col-xs-2
+      -# if e.recorded_check_out
+       -#.check_out_time= e.recorded_check_out.check_out.strftime("%H:%M %P")
+      -# else
+       -#=link_to 'Registrar Salida', check_out_path(:id => e.id)

@@ -10,8 +10,148 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+
  */
-/*@import "bootstrap-sprockets";*/
-@import "bootstrap";
+@import "main";
+
+body, html{
+  background-color: $almost-white;
+}
+
+.left_menu{
+  height: 100%;
+  width: 40px;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  transition: .5s;
+  //padding-top: 60px;
+
+  &:hover{
+    width: 200px;
+    -webkit-box-shadow: 18px 3px 23px -8px rgba(0,0,0,0.75);
+    -moz-box-shadow: 18px 3px 23px -8px rgba(0,0,0,0.75);
+    box-shadow: 18px 3px 23px -8px rgba(0,0,0,0.75);
+  }
+
+  .main_links{
+    padding-top: 5em;
+    padding-left: 5px;
+
+    a{
+      display: block;
+      //font-size: 1.2em;
+      color: #A518EB;
+      padding-bottom: 2em;
+
+      &.active{
+        color: #FF3A21;
+      }
+
+
+      &:hover{
+        color: #FF3A21;
+      }
+
+      span{
+
+        &.icon{
+          font-size: 2em;
+        }
+
+        span.link_text{
+          padding-left: 15px;
+          font-size: 20px;
+          font-family: 'Turret Road', cursive;
+        }
+      }
+    }
+  }
+
+
+}
+
+
+.header{
+  background-color: $white;
+  color: black;
+  height: 4em;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 100%;
+
+  .shadow{
+    -webkit-box-shadow: 3px 23px 22px -13px rgba(0,0,0,0.75);
+    -moz-box-shadow: 3px 23px 22px -13px rgba(0,0,0,0.75);
+    box-shadow: 3px 23px 22px -13px rgba(0,0,0,0.75);
+  }
+
+  .container{
+    padding-top: 20px;
+
+    .row{
+
+
+      .time-container{
+
+        h4{
+
+          span.fa-calendar{
+            color: #FF3A21;
+          }
+
+          span.time{
+            font-family: 'Turret Road', cursive;
+            color: black;
+
+          }
+        }
+
+      }
+      .clock-container{
+        text-align: center;
+
+
+        span.clock{
+          width: 10em;
+          font-family: 'Turret Road', cursive;
+          color: white;
+          border: 1px solid #FF3A21;
+          //padding-top: 8px;
+          background-color: #FF3A21;
+          border-radius: 5px;
+          padding: 8px 15px 5px 15px;
+        }
+
+      }
+      .credentials{
+        text-align: right;
+
+        span.user_email{
+          font-size: 1em;
+          padding-right: 20px;
+          color: black;
+          font-family: 'Turret Road', cursive;
+
+
+        }
+        a{
+          font-size: .8em;
+          background-color: #A518EB;
+          color: white;
+          padding: 5px 10px 5px 10px;
+          border-radius: 3px;
+        }
+      }
+    }
+  }
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}

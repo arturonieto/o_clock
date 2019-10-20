@@ -6,6 +6,30 @@
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.6.3/css/all.css", :integrity => "sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/", :rel => "stylesheet"}/
+    %link{:href => "https://fonts.googleapis.com/css?family=Mansalva|Pacifico|Turret+Road&display=swap", :rel => "stylesheet"}/
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
+    -if current_user
+      .left_menu
+        .main_links
+          =link_to raw('<span class="fab fa-first-order-alt icon"><span class="link_text">Inicio</span></span>'), '#', class: 'active'
+          =link_to raw('<span class="far fa-address-book icon"><span class="link_text">Registros</span></span>'), '#'
+          =link_to raw('<span class="far fa-chart-bar icon"><span class="link_text">Estadísticas</span></span>'), '#'
+          =link_to raw('<span class="far fa-user-circle icon"><span class="link_text">Perfil</span></span>'), '#'
+      .header
+        .container
+          .row
+            .col-md-4
+              .time-container
+                %h4
+                  %span.fas.fa-calendar
+                  %span.time= "&nbsp;".html_safe + Time.now.strftime("%d %m %Y")
+            .col-md-4
+              .clock-container
+                %h4
+                  %span.clock= render partial: "time"
+            .col-md-4.credentials
+              %span.user_email= current_user.email
+              =link_to 'logout', sessions_logout_path, method: 'delete', class: 'logout'
     = yield

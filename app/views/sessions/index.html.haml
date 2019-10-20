@@ -1,2 +1,13 @@
-.container
-  .p Soy la pistola
+.sessions_index
+ .container
+  .row
+   .col-md-6.col-xs-6.left
+    .form
+     = form_tag session_create_path, :method => :post do
+      = email_field_tag :email, nil,  placeholder: "Email"
+      = password_field_tag :password, nil, placeholder: "Password"
+      = submit_tag "Iniciar sesión", :class => 'normal-button'
+   .col-md-6.col-xs-6.rigth
+    %h4 Inicia sesión y abre tu bitácora
+    -if flash[:invalid_login]
+     %p.invalid_login= flash[:invalid_login]
