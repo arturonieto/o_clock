@@ -27,7 +27,7 @@
      - @this_week_records_true.each do |record|
       .row.records
        .col-md-4.col-xs-4.day
-        =l(record.check_in, format: "%^a - %b %d")
+        =l(record.check_in, format: "%^a %b %d")
        .col-md-4.col-xs-4.time_check_in{:class => ("on_time" if record.on_time)}
         =record.check_in.strftime("%H:%M %P")
        - if record.check_out
@@ -49,7 +49,7 @@
      - records_by_week.each do |record|
       .row.records
        .col-md-4.col-xs-4.day
-        =l(record.check_in, format: "%^a - %b %d")
+        =l(record.check_in, format: "%^a %b %d")
        .col-md-4.col-xs-4.time_check_in{:class => ("on_time" if record.on_time)}
         =record.check_in.strftime("%H:%M %P")
        - if record.check_out

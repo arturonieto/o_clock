@@ -2,13 +2,13 @@ class AdminsController < ApplicationController
   before_action :verify_role, except: :get_time
 
   def get_time
-    @time = Time.now.strftime("%H:%M:%S ")
+    @time = Time.zone.now.strftime("%H:%M:%S ")
     render partial: "application/time"
   end
 
   def index
     # Time will be updated every second by get_time with an ajax request
-    @time = Time.now.strftime("%H:%M:%S ")
+    @time = Time.zone.now.strftime("%H:%M:%S ")
     @active_index = "active"
 
     @employees = Employee.where(admin_id: current_user.admin.id).order(:id)
@@ -77,13 +77,13 @@ class AdminsController < ApplicationController
   end
 
   def manage_workers
-    @time = Time.now.strftime("%H:%M:%S ")
+    @time = Time.zone.now.strftime("%H:%M:%S ")
     @employees = Employee.where(admin_id: current_user.admin.id).order(:id)
     @active_manage_workers = 'active'
   end
 
   def manage_worker_records
-    @time = Time.now.strftime("%H:%M:%S ")
+    @time = Time.zone.now.strftime("%H:%M:%S ")
     @current_week = Time.now.strftime("%W")
     @active_manage_workers = 'active'
     @employee = Employee.find(params[:id])
@@ -101,7 +101,7 @@ class AdminsController < ApplicationController
   end
 
   def create_employee
-    @time = Time.now.strftime("%H:%M:%S ")
+    @time = Time.zone.now.strftime("%H:%M:%S ")
     @active_manage_workers = 'active'
     @user = User.new
   end
