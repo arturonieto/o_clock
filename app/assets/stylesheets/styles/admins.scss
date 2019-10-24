@@ -1,44 +1,365 @@
 // Place all the styles related to the admins controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
+*{
+  //border: 1px solid black;
+}
 .admins_index{
   margin-top: 4em;
 
+  .calometro{
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    background-color: $almost-white;
 
-  .container{
-    //text-align: center;
-    height: 1000em;
 
-    h2{
-      text-align: right;
-      padding-top: 40px;
-      font-family: 'Pacifico', cursive;
-      color: #FF3A21;
-      padding-bottom: 15px;
+    .row{
       border-bottom: 3px dashed #FF3A21;
+      padding-top: 6px;
+      transition: .2s;
+
+      h2{
+        text-align: right;
+        font-family: 'Pacifico', cursive;
+        color: #FF3A21;
+
+      }
+      h4{
+        color: #FF3A21;
+        margin-top: 10px;
+        font-family: 'Pacifico', cursive;
+        text-align: center;
+      }
     }
 
+
+  }
+
+
+  .container{
+
+
+
     .control_sheet{
-      margin-top: 1.5em;
+      padding-top: 4.5em;
+      height: 1000em;
 
       .row{
+        margin-top: 5px;
 
-        .col-md-6.employee_name{
-          text-align: right;
+        .col-md-6.col-xs-6.employee_name{
+          text-align: left;
           font-size: 2em;
           font-family: 'Turret Road', cursive;
-
-          text-align: right;
-          padding-bottom: 15px;
+          padding-bottom: 5px;
+          padding-top: 5px;
 
           .name{
-            border-right: 1px solid #A518EB;
-            padding-right: 20px;
+            padding-left: 20px;
           }
 
+        }
+
+        .col-md-2.col-xs-2{
+
+          text-align: center;
+          vertical-align: middle;
+          padding-top: 15px;
+          font-size: 17px;
+
+
+          a{
+            background-color: #A518EB;
+            padding-left: 45px;
+            padding-right: 45px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+            border-radius: 5px;
+            color: white;
+            font-family: 'Turret Road', cursive;
+            text-decoration: none;
+            transition: .1s;
+
+            &:hover{
+              background-color: #FF3A21;
+              transition: .1s;
+              -webkit-box-shadow: 0px 0px 11px 1px rgba(255,58,33,1);
+              -moz-box-shadow: 0px 0px 11px 1px rgba(255,58,33,1);
+              box-shadow: 0px 0px 11px 1px rgba(255,58,33,1);
+            }
+
+            &:active{
+              -webkit-box-shadow: 0px 0px 11px -2px rgba(255,58,33,1);
+              -moz-box-shadow: 0px 0px 11px -2px rgba(255,58,33,1);
+              box-shadow: 0px 0px 11px -2px rgba(255,58,33,1);
+            }
+          }
+
+          .check_in_time{
+            color: white;
+            font-family: 'Turret Road', cursive;
+            background-color: #FF3A21;
+            margin-top: 2px;
+            border-radius: 5px;
+            &.on_time{
+              background-color: #3B9900;
+            }
+
+          }
+
+          .check_out_time{
+            font-family: 'Turret Road', cursive;
+            background-color: #FFB001;
+            color: white;
+            border-radius: 5px;
+            margin-top: 2px;
+          }
         }
       }
     }
   }
+}
+
+.admins_manage_workers{
+  margin-top: 4em;
+
+  .title{
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    background-color: $almost-white;
+
+    .row{
+      border-bottom: 3px dashed #FF3A21;
+      padding-top: 6px;
+      transition: .2s;
+
+      .arrow_back{
+        a{
+          font-size: 2.1em;
+        }
+      }
+
+      h3{
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+        color: #FF3A21;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+      .crear_empleado{
+        margin-top: .7em;
+        text-align: right;
+
+        a{
+          font-size: 1.1em;
+          text-decoration: none;
+          padding: 10px 10px 10px 10px;
+          background-color: #A518EB;
+          color: white;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+
+  .container{
+    .control_sheet{
+      padding-top: 4.5em;
+      height: 1000em;
+
+      .row{
+        margin-top: .5em;
+        .col-md-1.col-xs-1{
+          text-align: center;
+
+          .index{
+            font-size: 1.8em;
+            font-family: 'Turret Road', cursive;
+            border-radius: 5px;
+            background-color: #FF3A21;
+            &.index_0{
+              background-color: gold;
+
+            }
+            &.index_1{
+              background-color: silver;
+
+            }
+            &.index_2{
+              background-color: #cd7f32;
+
+            }
+          }
+        }
+
+        .col-md-11.col-xs-11{
+
+          a{
+            font-size: 1.8em;
+            font-family: 'Turret Road', cursive;
+            text-decoration: none;
+            color: black;
+            transition: .3s;
+            padding: 10px 8px 10px 8px;
+            border-radius: 5px;
+            &:hover{
+              background-color: #FF3A21;
+              transition: .3s;
+            }
+
+
+            &.manage_worker_records_0{
+              font-size: 2.1em;
+              transition: .3s;
+              &:hover{
+                background-color: gold;
+                transition: .3s;
+              }
+            }
+            &.manage_worker_records_1{
+              font-size: 2.0em;
+              transition: .3s;
+              &:hover{
+                background-color: silver;
+                transition: .3s;
+              }
+            }
+            &.manage_worker_records_2{
+              font-size: 1.9em;
+              transition: .3s;
+              &:hover{
+                background-color: #cd7f32;
+                transition: .3s;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.admins_manage_worker_records{
+  margin-top: 4em;
+
+  .title{
+    position: fixed;
+    z-index: 3;
+    width: 100%;
+    background-color: $almost-white;
+
+    .row{
+      border-bottom: 3px dashed #FF3A21;
+      padding-top: 6px;
+      transition: .2s;
+
+      .arrow_back{
+        a{
+          font-size: 2.1em;
+        }
+      }
+
+      h3{
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+        color: #FF3A21;
+        padding-top: 5px;
+        padding-bottom: 5px;
+      }
+      .crear_empleado{
+        margin-top: .7em;
+        text-align: right;
+
+        a{
+          font-size: 1.1em;
+          text-decoration: none;
+          padding: 10px 10px 10px 10px;
+          background-color: #A518EB;
+          color: white;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  .container.control_sheet{
+    padding-top: 6em;
+    font-family: 'Turret Road', cursive;
+    .row.current_week{
+      margin-bottom: 3em;
+      padding-top: 1em;
+      padding-bottom: .5em;
+      color: black;
+      border-radius: 5px;
+      -webkit-box-shadow: 0px 0px 15px 5px rgba(59,153,0,1);
+      -moz-box-shadow: 0px 0px 15px 5px rgba(59,153,0,1);
+      box-shadow: 0px 0px 15px 5px rgba(59,153,0,1);
+      .records{
+        text-align: center;
+
+        .day{
+          border-bottom: 1px solid #A518EB;
+        }
+        .day_title{
+          border-bottom: 1px solid #A518EB;
+        }
+        .time_check_out{
+          color: #A518EB;
+          border-bottom: 1px solid #A518EB;
+        }
+        .time_check_in{
+          color: #FF3A21;
+          border-bottom: 1px solid #FF3A21;
+          &.on_time{
+            border-bottom: 1px solid #3B9900;
+            color: #3B9900;
+          }
+        }
+        .time_title{
+          border-bottom: 1px solid #A518EB;
+        }
+      }
+    }
+
+    .row.weeks{
+      margin-bottom: 3em;
+      background-color: white;
+      padding-top: 1em;
+      padding-bottom: .5em;
+      border-radius: 10px;
+      -webkit-box-shadow: 0px 0px 15px 5px rgba(90,87,92,1);
+      -moz-box-shadow: 0px 0px 15px 5px rgba(90,87,92,1);
+      box-shadow: 0px 0px 15px 5px rgba(90,87,92,1);
+
+      .records{
+        text-align: center;
+
+        .day{
+          border-bottom: 1px solid #A518EB;
+        }
+        .day_title{
+          border-bottom: 1px solid #A518EB;
+        }
+        .time_check_out{
+          color: #A518EB;
+          border-bottom: 1px solid #A518EB;
+        }
+        .time_check_in{
+          color: #FF3A21;
+          border-bottom: 1px solid #FF3A21;
+          &.on_time{
+            border-bottom: 1px solid #3B9900;
+            color: #3B9900;
+          }
+        }
+        .time_title{
+          border-bottom: 1px solid #A518EB;
+        }
+      }
+    }
+  }
+
 }

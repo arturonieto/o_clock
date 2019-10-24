@@ -5,6 +5,7 @@ class CreateEmployees < ActiveRecord::Migration[5.2]
       t.string   :last_name
       t.column   :entry_time, 'TIME'
       t.integer  :user_id
+      t.integer  :admin_id
       t.timestamps
     end
   end

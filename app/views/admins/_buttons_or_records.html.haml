@@ -1,22 +1,18 @@
 - @employees.each_with_index do |e, index|
  .row
+  .col-md-2.col-xs-2
+   - if e.recorded_check_in
+    - if e.on_time
+     .check_in_time.on_time= e.recorded_check_in.check_in.strftime("%H:%M %P")
+    - else
+     .check_in_time= e.recorded_check_in.check_in.strftime("%H:%M %P")
+   - else
+    =link_to "Registrar", check_in_path(:id => e.id), remote: false, method: :post, :class => "align-middle registrar_entrada_#{index}"
+  .col-md-2.col-xs-2
+   - if e.recorded_check_out
+    .check_out_time= e.recorded_check_out.check_out.strftime("%H:%M %P")
+   - else
+    =link_to "Registrar", check_out_path(:id => e.id), remote: true, method: :post, :class => "align-middle registrar_salida_#{index}"
   .col-md-6.col-xs-6.employee_name
    .name
     =' '+e.first_name+' '+e.last_name
-  .col-md-2.col-xs-2
-   - if @employee_id && @employee_id == e.id && @record_check_in_time
-    -# if @on_time
-     -#.check_in_time.blue= @record_check_in_time
-    -# else
-     -#.check_in_time.red= @record_check_in_time
-   - elsif e.recorded_check_in
-    .check_in_time= e.recorded_check_in.check_in.strftime("%H:%M %P")
-   - else
-    =link_to "Registrar Entrada", check_in_path(:id => e.id), remote: true, method: :post, :class => "registrar_entrada_#{index}"
-  .col-md-2.col-xs-2
-   - if @employee_id && @employee_id == e.id && @record_check_out_time
-    .check_out_time= @record_check_out_time
-   - elsif e.recorded_check_out
-    .check_out_time= e.recorded_check_out.check_out.strftime("%H:%M %P")
-   - else
-    =link_to "Registrar Salida", check_out_path(:id => e.id), remote: true, method: :post, :class => "registrar_salida_#{index}"

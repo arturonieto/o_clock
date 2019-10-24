@@ -17,6 +17,10 @@ gem 'rails-ajax', '~> 1.0', '>= 1.0.0.20140320'
 gem "haml-rails", "~> 2.0"
 # Get grahpic representations of the DB relations
 gem 'rails-erd', group: :development
+# Create charts with JavaScript
+gem "chartkick"
+# Group by day/month/hour/etc
+gem "groupdate"
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

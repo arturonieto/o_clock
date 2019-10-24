@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_one                       :employee, dependent: :destroy
   has_one                       :admin   , dependent: :destroy
   accepts_nested_attributes_for :employee, update_only: true
+  accepts_nested_attributes_for :admin, update_only: true
   has_secure_password
   # Role = 2 , admin
   # Role = 1 , employee

@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2019_10_09_000954) do
     t.string "last_name"
     t.time "entry_time"
     t.integer "user_id"
+    t.integer "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   get '/admin/index' => 'admins#index', as: :admin_index
   post '/admin/check_in' => 'admins#check_in', as: :check_in
   post '/admin/check_out' => 'admins#check_out', as: :check_out
+  get '/admin/manage_workers' => 'admins#manage_workers', as: :manage_workers
+  get '/admin/manage_worker_records' => 'admins#manage_worker_records', as: :manage_worker_records
+  get '/admin/create_employee' => 'users#create_employee', as: :users
+  post '/admin/create_employee' => 'users#create', as: :create_employee_post
 
   #resources :admins do
   #  collection do

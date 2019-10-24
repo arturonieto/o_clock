@@ -8,100 +8,58 @@ class AdminsController < ApplicationController
   end
 
   def index
-    # Time will render partially in the header every second
+    # Time will be updated every second by get_time with an ajax request
     @time = Time.now.strftime("%H:%M:%S ")
+    @active_index = "active"
 
-
-    @employees = Employee.order(:id)
+    @employees = Employee.where(admin_id: current_user.admin.id).order(:id)
     start_date = Date.today.beginning_of_day
     end_date = Date.today.beginning_of_day + 1.day
 
     @employees.each do |e|
       e.recorded_check_in = e.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
       e.recorded_check_out = e.records.detect{ |r| r[:check_out] and r[:check_out].between?(start_date, end_date) }
-      #p b_movies=movies.select{|movie| movie[:title].downcase.include?("b")}.map{|movie| movie[:id]}
-      #e.recorded = 1 if e.records.
-      #e.records.select { |r| r.check_in.between?(start_date, end_date) }.any? ? e.recorded = 1 : e.recorded = 0
-      #e.recorded = 1 if e.records(:check_in).between?(star_date, end_date).any?
-      #@selected_records = Array.new
-      #@selected_records.push( e.records.where(check_in >= @start_date and r.check_in < end_date))#.find { |r| r.check_in >= start_date && r.check_in < end_date }
-      #found = array.select {|e| e == 3}
-      #e.get_today_records
-      #today == ChristmasEve ? (puts "Santa's On His Way!") : (puts "Snow")
-      #record = Record.where(where_string, e.id, start_date, end_date)
-      #record = Record.where('employee_id = ? and check_in >= ? and check_in < ?', e.id, Date.current.beginning_of_day, Date.current.beginning_of_day + 1.day).any?
-      #record ? e.check_in_today = 1 : e.check_in_today = 0
-      #if Record.where(where_string, e.id, start_date, end_date)#.any?
-      #  e.check_in_today = 1
-      #else
-      #  e.check_in_today
+
+      if e.recorded_check_in and e.recorded_check_in.check_in.strftime("%H:%M %P") <= e.entry_time.strftime("%H:%M %P")
+        e.on_time = 1
+      end
     end
 
-    #render partial: "buttons_or_records"
-    # Hay que cambiar todo el loop al buttons and records
-    #respond_to do |format|
-    #  format.js
-    #end
   end
 
   def check_in
     employee = Employee.find(params[:id])
     start_date = Date.today.beginning_of_day
     end_date = Date.today.beginning_of_day + 1.day
-    #@employee_id = 0
-    #@record_check_in_time = 0
 
-    if employee.records.detect{ |r| r[:check_in].between?(start_date, end_date) }
-      #render partial: "buttons_or_records"
+    if employee.records.detect{ |r| r[:check_in] && r[:check_in].between?(start_date, end_date) }
+
     else
       record = Record.new(employee_id: employee.id, check_in: Time.now)
-      if record.save!
-        #redirect_back
-        #@employee_id = employee.id
-        #@record_check_in_time = record.check_in.strftime("%H:%M %P")
-        #if employee.entry_time > record.check_in.time
-        #  @on_time = 1
-        #end
-        #self.get_record_time
-        #@employees = Employee.order(:id)
-        #start_date = Date.today.beginning_of_day
-        #end_date = Date.today.beginning_of_day + 1.day
+    end
 
-        #@employees.each do |e|
-          #e.recorded_check_in = e.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
-          #e.recorded_check_out = e.records.detect{ |r| r[:check_out] and r[:check_out].between?(start_date, end_date) }
-          #p b_movies=movies.select{|movie| movie[:title].downcase.include?("b")}.map{|movie| movie[:id]}
-          #e.recorded = 1 if e.records.
-          #e.records.select { |r| r.check_in.between?(start_date, end_date) }.any? ? e.recorded = 1 : e.recorded = 0
-          #e.recorded = 1 if e.records(:check_in).between?(star_date, end_date).any?
-          #@selected_records = Array.new
-          #@selected_records.push( e.records.where(check_in >= @start_date and r.check_in < end_date))#.find { |r| r.check_in >= start_date && r.check_in < end_date }
-          #found = array.select {|e| e == 3}
-          #e.get_today_records
-          #today == ChristmasEve ? (puts "Santa's On His Way!") : (puts "Snow")
-          #record = Record.where(where_string, e.id, start_date, end_date)
-          #record = Record.where('employee_id = ? and check_in >= ? and check_in < ?', e.id, Date.current.beginning_of_day, Date.current.beginning_of_day + 1.day).any?
-          #record ? e.check_in_today = 1 : e.check_in_today = 0
-          #if Record.where(where_string, e.id, start_date, end_date)#.any?
-          #  e.check_in_today = 1
-          #else
-          #  e.check_in_today
-        #end
-        #render partial: "buttons_or_records"
-        #return true
-        #respond_to do |format|
-        #  format.js
-          #format.coffeescript
-        #end
-        #return render html: "buttons_or_records"
-        #reload
-        #return true
-        #render partial: "buttons_or_records"
-        #redirect_to 'admin/index'
-        #redirect_to render partial: "buttons_or_records"
+    record.save!
+    @employees = Employee.where(admin_id: current_user.admin.id).order(:id)
+    start_date = Date.today.beginning_of_day
+    end_date = Date.today.beginning_of_day + 1.day
 
+    @employees.each do |e|
+      e.recorded_check_in = e.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
+      e.recorded_check_out = e.records.detect{ |r| r[:check_out] and r[:check_out].between?(start_date, end_date) }
+
+      if e.recorded_check_in and e.recorded_check_in.check_in.strftime("%H:%M %P") <= e.entry_time.strftime("%H:%M %P")
+        e.on_time = 1
       end
     end
+    redirect_to :back
+    #redirect_to admin_index_path
+    #render partial: "buttons_or_records"
+    respond_to do |format|
+    #  if record.save!
+      format.js
+    #  end
+    end
+
   end
 
 
@@ -109,70 +67,58 @@ class AdminsController < ApplicationController
     employee = Employee.find(params[:id])
     start_date = Date.today.beginning_of_day
     end_date = Date.today.beginning_of_day + 1.day
-    #@employee_id = 0
-    #@record_check_out_time = 0
-    #employee.records.detect{ |r| r[:check_in].between?(start_date, end_date) }
+
     if employee.records.detect{ |r| r[:check_out] and r[:check_out].between?(start_date, end_date) }
-      #render partial: "buttons_or_records"
-      #return
+
     elsif !employee.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
-      #return
+
     else
-      record = Record.new(employee_id: employee.id, check_out: Time.now)
-      #if record.save!
-        #@employee_id = employee.id
-        #@record_check_out_time = record.check_out.strftime("%H:%M %P")
-        #self.get_record_time
-        #self.get_button_or_record
-
-        #respond_to do |format|
-        #  format.js
-        #end
-
-      #end
+      #record = Record.new(employee_id: employee.id, check_out: Time.now)
+      record = employee.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
+      record.update(check_out: Time.now)
     end
 
-    if record.save!
-    end
-
+    record.save!
   end
-=begin
-  def get_button_or_record
-    @employees = Employee.order(:id)
-    start_date = Date.today.beginning_of_day
-    end_date = Date.today.beginning_of_day + 1.day
-
-    @employees.each do |e|
-      e.recorded_check_in = e.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
-      e.recorded_check_out = e.records.detect{ |r| r[:check_out] and r[:check_out].between?(start_date, end_date) }
-      #p b_movies=movies.select{|movie| movie[:title].downcase.include?("b")}.map{|movie| movie[:id]}
-      #e.recorded = 1 if e.records.
-      #e.records.select { |r| r.check_in.between?(start_date, end_date) }.any? ? e.recorded = 1 : e.recorded = 0
-      #e.recorded = 1 if e.records(:check_in).between?(star_date, end_date).any?
-      #@selected_records = Array.new
-      #@selected_records.push( e.records.where(check_in >= @start_date and r.check_in < end_date))#.find { |r| r.check_in >= start_date && r.check_in < end_date }
-      #found = array.select {|e| e == 3}
-      #e.get_today_records
-      #today == ChristmasEve ? (puts "Santa's On His Way!") : (puts "Snow")
-      #record = Record.where(where_string, e.id, start_date, end_date)
-      #record = Record.where('employee_id = ? and check_in >= ? and check_in < ?', e.id, Date.current.beginning_of_day, Date.current.beginning_of_day + 1.day).any?
-      #record ? e.check_in_today = 1 : e.check_in_today = 0
-      #if Record.where(where_string, e.id, start_date, end_date)#.any?
-      #  e.check_in_today = 1
-      #else
-      #  e.check_in_today
-    end
-    render partial: "buttons_or_records"
-  end
-=end
-
-  #def check_out
-  #end
 
   def get_time
     @time = Time.now.strftime("%H:%M:%S ")
     #e.recorded_check_in.check_in.strftime("%H:%M %P")
-    #render partial: "date"
+    #render partial: "time"
+  end
+
+  def manage_workers
+    @time = Time.now.strftime("%H:%M:%S ")
+    @employees = Employee.where(admin_id: current_user.admin.id).order(:id)
+    @active_manage_workers = 'active'
+  end
+
+  def manage_worker_records
+    @time = Time.now.strftime("%H:%M:%S ")
+    @current_week = Time.now.strftime("%W")
+    @active_manage_workers = 'active'
+    @employee = Employee.find(params[:id])
+    #@records = @employee.records.group_by(&:week)
+    #@this_week_records = @employee.records.group_by(&:current_week)
+    #@this_week_records_true = @this_week_records[true]
+    @employee.records.each do |record|
+      if record.check_in and record.check_in.strftime("%H:%M %P") <= @employee.entry_time.strftime("%H:%M %P")
+        record.on_time = 1
+      end
+    end
+    #if e.recorded_check_in and e.recorded_check_in.check_in.strftime("%H:%M %P") <= e.entry_time.strftime("%H:%M %P")
+
+    #end
+    @records = @employee.records.group_by(&:week)
+    @this_week_records = @employee.records.group_by(&:current_week)
+    @this_week_records_true = @this_week_records[true]
+
+  end
+
+  def create_employee
+    @time = Time.now.strftime("%H:%M:%S ")
+    @active_manage_workers = 'active'
+    @user = User.new
   end
 
 end

@@ -1,0 +1,22 @@
+.admins_manage_workers
+ .title
+  .container
+   .row
+    .col-md-1.col-xs-1
+     .arrow_back
+      =link_to admin_index_path, remote: false do
+       %span.fas.fa-arrow-alt-circle-left
+    .col-md-9.col-xs-9
+     %h3 Selecciona un usuario para ver registros
+    .col-md-2.col-xs-2
+     .crear_empleado
+      =link_to "Nuevo Usuario", users_path, remote: false, :class => "create_employee"
+ .container
+  .control_sheet
+   - @employees.each_with_index do |e, index|
+    .row
+     .col-md-1.col-xs-1
+      .index{:class => "index_#{index}"}
+       =index + 1
+     .col-md-11.col-xs-11
+      =link_to e.first_name+' '+e.last_name, manage_worker_records_path(:id => e.id), remote: false, :class => "manage_worker_records_#{index}"

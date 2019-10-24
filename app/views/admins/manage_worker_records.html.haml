@@ -1,0 +1,57 @@
+.admins_manage_worker_records
+ .title
+  .container
+   .row
+    .col-md-1.col-xs-1
+     .arrow_back
+      =link_to manage_workers_path, remote: false do
+       %span.fas.fa-arrow-alt-circle-left
+    .col-md-9.col-xs-9
+     %h3= @employee.first_name + ' ' + @employee.last_name
+    .col-md-2.col-xs-2
+     .crear_empleado
+      =link_to "Nuevo Usuario", users_path, remote: false, :class => "create_employee"
+ .container.control_sheet
+  .row.current_week
+   .col-md-3.col-xs-3
+    %h5= "Semana #{@current_week} (en curso)"
+   .col-md-6.col-xs-6
+    .row.records
+     .col-md-4.col-xs-4.day_title
+      Dia
+     .col-md-4.col-xs-4.time_title
+      Entrada
+     .col-md-4.col-xs-4.time_title
+      Salida
+    - if @this_week_records_true
+     - @this_week_records_true.each do |record|
+      .row.records
+       .col-md-4.col-xs-4.day
+        =l(record.check_in, format: "%^a - %b %d")
+       .col-md-4.col-xs-4.time_check_in{:class => ("on_time" if record.on_time)}
+        =record.check_in.strftime("%H:%M %P")
+       - if record.check_out
+        .col-md-4.col-xs-4.time_check_out
+         =record.check_out.strftime("%H:%M %P")
+  - @records.each do |week, records_by_week|
+   - next if week == @current_week
+   .row.weeks
+    .col-md-3.col-xs-3
+     %h5= "Semana #{week}"
+    .col-md-6.col-xs-6
+     .row.records
+      .col-md-4.col-xs-4.day_title
+       Dia
+      .col-md-4.col-xs-4.time_title
+       Entrada
+      .col-md-4.col-xs-4.time_title
+       Salida
+     - records_by_week.each do |record|
+      .row.records
+       .col-md-4.col-xs-4.day
+        =l(record.check_in, format: "%^a - %b %d")
+       .col-md-4.col-xs-4.time_check_in{:class => ("on_time" if record.on_time)}
+        =record.check_in.strftime("%H:%M %P")
+       - if record.check_out
+        .col-md-4.col-xs-4.time_check_out
+         =record.check_out.strftime("%H:%M %P")

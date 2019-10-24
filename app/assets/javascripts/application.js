@@ -18,12 +18,18 @@
 //= require angular
 //= require popper
 //= require bootstrap-sprockets
+//= require chartkick
+//= require Chart.bundle
+
 
 $(document).ready(function () {
 
     //setInterval(function () {
     //    $('.clock-container .clock').load('/admin/get_time');
     //}, 1000);
+    //return $("a[data-remote]").on("ajax:success", function(event) {
+      //return location.reload();
+    //});
 
     $(".left_menu").hover(function(){
       $(this).addClass("open_left_menu");
@@ -34,7 +40,7 @@ $(document).ready(function () {
     $(window).scroll(function() {
         var scroll = $(window).scrollTop();
 
-        if (scroll >= 5) {
+        if (scroll >= 3) {
           $(".header").addClass("shadow");
         }
         else{
