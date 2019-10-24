@@ -7,15 +7,12 @@
 #  return
 #), 1000
 
-
-
+ 
 $(document).ready ->
- #$("a[data-remote]").on "ajax:success", (event) ->
-   #location.reload()
- #content = j (render partial: "buttons_or_records")
- #$('.random-employees_buttons_or_records').html "#{content}"
+   
 
- #$(".employees_buttons_or_records").html "<%= j render(partial: 'buttons_or_records')%>"
+ $(document).on 'ajax:success', 'a[data-remote]', -> 
+  $('.employees_buttons_or_records').load '/admin/get_records'
 
  $(window).scroll ->
    scroll = $(window).scrollTop()
@@ -26,4 +23,3 @@ $(document).ready ->
     $(".calometro .row").removeClass "shadow_calometro"
     $(".title .row").removeClass "shadow_calometro"
    return
-###

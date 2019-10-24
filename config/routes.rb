@@ -9,23 +9,18 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#logout'
 
   get '/admin/index' => 'admins#index', as: :admin_index
-  post '/admin/check_in' => 'admins#check_in', as: :check_in
+  get '/admin/check_in' => 'admins#check_in', as: :check_in
   post '/admin/check_out' => 'admins#check_out', as: :check_out
   get '/admin/manage_workers' => 'admins#manage_workers', as: :manage_workers
   get '/admin/manage_worker_records' => 'admins#manage_worker_records', as: :manage_worker_records
   get '/admin/create_employee' => 'users#create_employee', as: :users
   post '/admin/create_employee' => 'users#create', as: :create_employee_post
-
-  #resources :admins do
-  #  collection do
-  #    post :check_in
-  #    post :check_out
-  #  end
-  #end
+  
+  get '/employee/index' => 'employees#index', as: :employee_index
 
   # Partial html render
-  #get '/admin/get_time' => 'admins#get_time'
-  #get '/admin/get_button_or_record' => 'admins#get_button_or_record'
+  get '/admin/get_time' => 'admins#get_time'
+  get '/admin/get_records' => 'admins#get_records'
 
 
 

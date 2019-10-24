@@ -24,12 +24,9 @@
 
 $(document).ready(function () {
 
-    //setInterval(function () {
-    //    $('.clock-container .clock').load('/admin/get_time');
-    //}, 1000);
-    //return $("a[data-remote]").on("ajax:success", function(event) {
-      //return location.reload();
-    //});
+    setInterval(function () {
+        $('.clock-container .clock').load('/admin/get_time');
+    }, 1000);
 
     $(".left_menu").hover(function(){
       $(this).addClass("open_left_menu");

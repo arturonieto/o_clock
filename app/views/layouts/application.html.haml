@@ -17,6 +17,7 @@
           =link_to raw('<span class="far fa-address-book icon"><span class="link_text">Registros</span></span>'), manage_workers_path, remote: false, class: "#{@active_manage_workers}"
           =link_to raw('<span class="far fa-chart-bar icon"><span class="link_text">Estadísticas</span></span>'), '#'
           =link_to raw('<span class="far fa-user-circle icon"><span class="link_text">Perfil</span></span>'), '#'
+    -if current_user
       .header
         .container
           .row
@@ -30,6 +31,9 @@
                 %h4
                   %span.clock= render partial: "time"
             .col-md-4.credentials
-              %span.user_email= current_user.email
-              =link_to 'logout', sessions_logout_path, method: 'delete', class: 'logout'
+              - if current_user.employee
+                %span.user_email=  current_user.employee.first_name + ' ' + current_user.employee.last_name
+              - else
+                %span.user_email=  current_user.admin.first_name + ' ' + current_user.admin.last_name
+              =link_to 'logout', sessions_logout_path, remote: false, method: 'delete', class: 'logout'
     = yield
