@@ -7,7 +7,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.find(current_user.employee.id)
 
     @employee.records.each do |record|
-      if record.check_in and record.check_in.strftime("%H:%M %P") <= @employee.entry_time.strftime("%H:%M %P")
+      if record.check_in && record.check_in.strftime("%H:%M %P") <= @employee.entry_time.strftime("%H:%M %P")
         record.on_time = 1
       end
     end

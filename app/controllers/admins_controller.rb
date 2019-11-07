@@ -16,10 +16,10 @@ class AdminsController < ApplicationController
     end_date = Date.today.beginning_of_day + 1.day
 
     @employees.each do |e|
-      e.recorded_check_in = e.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
-      e.recorded_check_out = e.records.detect{ |r| r[:check_out] and r[:check_out].between?(start_date, end_date) }
+      e.recorded_check_in = e.records.detect{ |r| r[:check_in] && r[:check_in].between?(start_date, end_date) }
+      e.recorded_check_out = e.records.detect{ |r| r[:check_out] && r[:check_out].between?(start_date, end_date) }
 
-      if e.recorded_check_in and e.recorded_check_in.check_in.strftime("%H:%M %P") <= e.entry_time.strftime("%H:%M %P")
+      if e.recorded_check_in && e.recorded_check_in.check_in.strftime("%H:%M %P") <= e.entry_time.strftime("%H:%M %P")
         e.on_time = 1
       end
     end
@@ -47,12 +47,12 @@ class AdminsController < ApplicationController
     start_date = Date.today.beginning_of_day
     end_date = Date.today.beginning_of_day + 1.day
 
-    if employee.records.detect{ |r| r[:check_out] and r[:check_out].between?(start_date, end_date) }
+    if employee.records.detect{ |r| r[:check_out] && r[:check_out].between?(start_date, end_date) }
 
-    elsif !employee.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
+    elsif !employee.records.detect{ |r| r[:check_in] && r[:check_in].between?(start_date, end_date) }
 
     else
-      record = employee.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
+      record = employee.records.detect{ |r| r[:check_in] && r[:check_in].between?(start_date, end_date) }
       record.update(check_out: Time.now)
     end
 
@@ -66,10 +66,10 @@ class AdminsController < ApplicationController
     end_date = Date.today.beginning_of_day + 1.day
 
     @employees.each do |e|
-      e.recorded_check_in = e.records.detect{ |r| r[:check_in] and r[:check_in].between?(start_date, end_date) }
-      e.recorded_check_out = e.records.detect{ |r| r[:check_out] and r[:check_out].between?(start_date, end_date) }
+      e.recorded_check_in = e.records.detect{ |r| r[:check_in] && r[:check_in].between?(start_date, end_date) }
+      e.recorded_check_out = e.records.detect{ |r| r[:check_out] && r[:check_out].between?(start_date, end_date) }
 
-      if e.recorded_check_in and e.recorded_check_in.check_in.strftime("%H:%M %P") <= e.entry_time.strftime("%H:%M %P")
+      if e.recorded_check_in && e.recorded_check_in.check_in.strftime("%H:%M %P") <= e.entry_time.strftime("%H:%M %P")
         e.on_time = 1
       end
     end
@@ -89,7 +89,7 @@ class AdminsController < ApplicationController
     @employee = Employee.find(params[:id])
 
     @employee.records.each do |record|
-      if record.check_in and record.check_in.strftime("%H:%M %P") <= @employee.entry_time.strftime("%H:%M %P")
+      if record.check_in && record.check_in.strftime("%H:%M %P") <= @employee.entry_time.strftime("%H:%M %P")
         record.on_time = 1
       end
     end
