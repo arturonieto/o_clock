@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+O_clock
 
-Things you may want to cover:
+Ruby on Rails version -> 5.2.3
+Postgres version      -> 11.5
 
-* Ruby version
+Using free Heroku service ( bit slow )
 
-* System dependencies
+- Register check in and check out
+- Manage employee records
+- Add new employees
+- Get total time late
+- Employees can view their records
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
